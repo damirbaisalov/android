@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eceff4"
+    tools:context=".MainActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/topbarblue"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="#5081b9"
+            android:orientation="horizontal"
+            android:weightSum="5">
+
+
+            <ImageButton
+                android:id="@+id/leftbar"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#5081b9"
+                android:paddingRight="8dp"
+                android:src="@drawable/ic_menu" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:paddingLeft="5dp"
+                android:paddingTop="15dp"
+                android:layout_weight="3"
+
+                android:text="Новости"
+                android:textColor="#FFF"
+                android:textSize="20dp"
+
+                />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+
+                android:layout_weight="1"
+                android:background="#5081b9"
+                android:paddingLeft="20dp"
+                android:src="@drawable/ic_search"
+
+
+                />
+
+        </LinearLayout>
+
+    <LinearLayout android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        >
+
+
+    </LinearLayout>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+       android:layout_marginTop="60dp"
+        android:background="#FFF"
+        tools:listitem="@layout/layout_listitem">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+</FrameLayout>
