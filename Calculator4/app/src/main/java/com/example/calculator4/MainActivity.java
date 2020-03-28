@@ -80,9 +80,22 @@ public class MainActivity extends AppCompatActivity {
     public Button rad;
     public Button deg;
 
+    public Button bnfactorial;
+    public Button bnpower;
+    public Button bncos;
+    public Button bnsin;
+    public Button bntan;
+    public Button bnln;
+    public Button bnlog;
+    public Button bnpercent;
+
+
+
     public boolean dot = false;
     public double num1 = 0;
     public double num2 = 0;
+
+    public int temp = 0;
 
     State state = State.START;
     Sign sign = Sign.UNDEFINED;
@@ -159,14 +172,14 @@ public class MainActivity extends AppCompatActivity {
 
          txtV = findViewById(R.id.textView);
 
-        final Button btFactorial = findViewById(R.id.factorial);
-        final Button btPowerN = findViewById(R.id.xysquare);
-        final Button btPercent = findViewById(R.id.percent);
-        final Button btSin = findViewById(R.id.sin);
-        final Button btCos = findViewById(R.id.cos);
-        final Button btTan = findViewById(R.id.tan);
-        final Button btLn = findViewById(R.id.ln);
-        final Button btLog = findViewById(R.id.log);
+         bnfactorial = findViewById(R.id.factorial);
+         bnpower = findViewById(R.id.xysquare);
+        bnpercent = findViewById(R.id.percent);
+         bnsin = findViewById(R.id.sin);
+         bncos = findViewById(R.id.cos);
+        bntan = findViewById(R.id.tan);
+        bnln = findViewById(R.id.ln);
+        bnlog = findViewById(R.id.log);
 
 //        deleteAll.setOnClickListener(this);
 //        deleteAll.setOnClickListener(new View.OnClickListener() {
@@ -555,29 +568,33 @@ public class MainActivity extends AppCompatActivity {
                         }
                         try {
                             num1 = Double.parseDouble(calcScreen.getText().toString());
+                            temp = (int) num1;
                         }
                         catch(NumberFormatException e)
                         {
                             calcScreen.setText("");
+                            break;
                         }
-                        if (!calcScreen.getText().toString().equals("Infinity")){
-                            if (num1 < 0 || num1 >100  ){
-                                calcScreen.setText("Infinity");}
+//                        if (calcScreen.getText().toString().equals("Infinity") != true){
+                            if (temp < 0 || temp > 100 ){
+                                calcScreen.setText("Infinity");
+                            break;}
                             else{
-                                if (num1 == 0 ){
-                                    calcScreen.setText("1");
+                                if (temp == 0 ){
+//                                    calcScreen.setText("1");
+                                    temp = 1;
                                 } else{
-
-                                    for (int i=0;i<=num1;i++){
-                                        num1*=i;
+                                    int result =1;
+                                    for (int i=1; i <= temp; i++){
+                                       result= result*i;
                                     }
+                                    temp = result;
                                 }
                             }
-
+                            num1 = temp;
                             calcScreen.setText(Double.toString(num1));
-                        }
                         dot=false;
-                        break;
+                    break;
 //8
                     case R.id.xysquare:
                         state = State.XYSQUARE;
@@ -656,14 +673,14 @@ public class MainActivity extends AppCompatActivity {
 
 
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            btFactorial.setOnClickListener(calcOnclick);
-            btPowerN.setOnClickListener(calcOnclick);
-            btSin.setOnClickListener(calcOnclick);
-            btCos.setOnClickListener(calcOnclick);
-            btTan.setOnClickListener(calcOnclick);
-            btLn.setOnClickListener(calcOnclick);
-            btLog.setOnClickListener(calcOnclick);
-            btPercent.setOnClickListener(calcOnclick);
+            bnfactorial.setOnClickListener(calcOnclick);
+            bnpercent.setOnClickListener(calcOnclick);
+            bncos.setOnClickListener(calcOnclick);
+            bnsin.setOnClickListener(calcOnclick);
+            bntan.setOnClickListener(calcOnclick);
+            bnln.setOnClickListener(calcOnclick);
+            bnlog.setOnClickListener(calcOnclick);
+            bnpower.setOnClickListener(calcOnclick);
             rad.setOnClickListener(calcOnclick);
             deg.setOnClickListener(calcOnclick);
         }
