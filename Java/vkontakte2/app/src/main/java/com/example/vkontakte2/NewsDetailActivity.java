@@ -11,6 +11,7 @@ import com.squareup.picasso.Picasso;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewDebug;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -20,21 +21,18 @@ import android.widget.Toast;
 
 public class NewsDetailActivity extends AppCompatActivity {
 
-    private ImageView imageViewIntentResult;
+    ImageView imageViewIntentResult;
     TextView imageName;
     TextView timeName;
     TextView contentName;
     ImageView contentImage;
-    LinearLayout toolTrio;
-    ImageButton icLike;
-    ImageButton icComment;
-    ImageButton icShare;
-    RelativeLayout parentLayout;
     TextView likeNum;
-    TextView commentNum;
     TextView shareNum;
     TextView viewsNum;
-    boolean isLiked;
+    ImageButton likedBtn;
+    ImageButton leftBar;
+    EditText mEdit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,14 +43,17 @@ public class NewsDetailActivity extends AppCompatActivity {
         timeName = findViewById(R.id.time_name);
         contentName = findViewById(R.id.content_name);
         contentImage = findViewById(R.id.content_image);
-//        toolTrio = findViewById(R.id.like_bar);
-//        icLike = findViewById(R.id.ic_like);
-//        icComment = findViewById(R.id.ic_comment);
-//        icShare = findViewById(R.id.ic_share);
         likeNum = findViewById(R.id.like_num);
         shareNum = findViewById(R.id.share_num);
         viewsNum = findViewById(R.id.views_num);
+        likedBtn = findViewById(R.id.ic_like_logo);
 
+        mEdit = findViewById(R.id.editComment);
+        mEdit.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                mEdit.setFocusableInTouchMode(true); //to enable it
+            }
+        });
 
         final News news = (News) getIntent().getParcelableExtra("news");
         Glide.with(imageViewIntentResult.getContext()).load(news.getImage()).into(imageViewIntentResult);
@@ -64,9 +65,12 @@ public class NewsDetailActivity extends AppCompatActivity {
         shareNum.setText(String.valueOf(news.getShareNum()));
         viewsNum.setText(String.valueOf(news.getViewsNum()));
 
+        if (news.getLiked()==0)
+            Glide.with(likedBtn.getContext()).load(R.drawable.ic_favorite_black).into(likedBtn);
+        else
+            Glide.with(likedBtn.getContext()).load(R.drawable.ic_like).into(likedBtn);
 
-        ImageButton leftBar = findViewById(R.id.leftbar);
-
+        leftBar = findViewById(R.id.leftbar);
         leftBar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent homeIntent = new Intent(NewsDetailActivity.this, MainActivity.class);
@@ -74,17 +78,17 @@ public class NewsDetailActivity extends AppCompatActivity {
             }
         });
 
-        final ImageButton  like = findViewById(R.id.ic_favorite);
-        like.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String temp = likeNum.getText().toString();
-                int i = Integer.parseInt(temp);
-                    if (isLiked==true) {
-                        isLiked=false;
+        likedBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String temp = likeNum.getText().toString();
+                    int i = Integer.parseInt(temp);
+                    if (news.getLiked()==1) {
+                        news.setLiked(0);
                         i=i-1;
                         likeNum.setText(String.valueOf(i));
-                        like.setImageResource(R.drawable.ic_favorite_black);
+                        news.setLikeNum(news.getLikeNum()-1);
+                        likedBtn.setImageResource(R.drawable.ic_favorite_black);
                         Toast toast = Toast.makeText(v.getContext(),
                                 "Like removed!",
                                 Toast.LENGTH_SHORT);
@@ -92,17 +96,14 @@ public class NewsDetailActivity extends AppCompatActivity {
                         toast.show();
                     } else {
                         i=i+1;
-//                        news.setLiked(1);
-//                        news.setLikeNum(news.getLikeNum()+1);
-                       like.setImageResource(R.drawable.ic_like);
+                        news.setLiked(1);
+                        likedBtn.setImageResource(R.drawable.ic_like);
                         likeNum.setText(String.valueOf(i));
-
                         Toast toast1 = Toast.makeText(v.getContext(),
                                 "Like done!",
                                 Toast.LENGTH_LONG);
                         toast1.setGravity(Gravity.CENTER,0,0);
                         toast1.show();
-                        isLiked=true;
                     }
                 }
 

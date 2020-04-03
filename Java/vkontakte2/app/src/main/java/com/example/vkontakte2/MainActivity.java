@@ -12,9 +12,12 @@ import android.content.Intent;
 import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,15 +25,9 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity  {
 
-   private RecyclerView recyclerView;
+    private RecyclerView recyclerView;
     private RecyclerViewAdapter adapter;
-    ImageButton like;
-
-
-
     private RecyclerViewAdapter.ItemClickListener listener = null;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,17 +46,12 @@ public class MainActivity extends AppCompatActivity  {
 
         };
 
-
      initRecyclerView();
-
 
     }
 
-
-
     private List<News> generateNews() {
         List<News> items = new ArrayList<>();
-
         ArrayList<Integer> image = new ArrayList<>();
         ArrayList<String> imageName = new ArrayList<>();
         ArrayList<Integer> imageContent = new ArrayList<>();
@@ -69,12 +61,12 @@ public class MainActivity extends AppCompatActivity  {
         ArrayList<Integer> commentNum = new ArrayList<>();
         ArrayList<Integer> shareNum = new ArrayList<>();
 
+
         image.add(R.drawable.logo1);
         imageName.add("Илон Маск");
         imageContent.add(R.drawable.contentlogo1);
         timeName.add("15 минут назад");
         contentName.add("Tesla — американская компания, производитель электромобилей и решений для хранения электрической энергии. Компания была основана в июле 2003 года Мартином Эберхардом и Марком Тарпеннингом, но сама компания считает Илона Маска, Джеффри Брайана Штробеля и Иэна Райта её сооснователями.");
-
 
         image.add(R.drawable.naturelogo);
         imageName.add("Nature");
@@ -143,25 +135,17 @@ public class MainActivity extends AppCompatActivity  {
                     i,
                     i,
                     i,
-                    i
-
+                    0
             );
             items.add(news);
         }
         return items;
-
-
     }
 
-//    private void loadNews(){
-//        Collection<News> news = getNews();
-//        adapter.setItems(news);
-//    }
 
     private void initRecyclerView(){
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
         adapter = new RecyclerViewAdapter(generateNews(),listener);
         recyclerView.setAdapter(adapter);
     }

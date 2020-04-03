@@ -15,8 +15,16 @@ public class News implements Parcelable {
     private int commentNum;
     private int shareNum;
     private int viewsNum;
+    private int liked ;
+    private int likeBtn;
 
-    private int liked;
+    public int getLikeBtn() {
+        return likeBtn;
+    }
+
+    public void setLikeBtn(int likeBtn) {
+        this.likeBtn = likeBtn;
+    }
 
     public int getLikeNum() {
         return likeNum;
@@ -67,8 +75,9 @@ public class News implements Parcelable {
             int likeNum,
             int commentNum,
             int shareNum,
-            int liked,
-            int viewsNum) {
+            int viewsNum,
+            int liked
+    ) {
         this.imageName = imageName;
         this.timeName = timeName;
         this.contentName = contentName;
@@ -77,8 +86,9 @@ public class News implements Parcelable {
         this.likeNum = likeNum;
         this.commentNum = commentNum;
         this.shareNum = shareNum;
-        this.liked = liked;
         this.viewsNum = viewsNum;
+        this.liked= liked;
+        this.likeBtn = R.drawable.ic_favorite_black;
     }
 
     public String getImageName() {
@@ -135,6 +145,7 @@ public class News implements Parcelable {
         sb.append(", shareNum=' ").append(shareNum).append('\'');
         sb.append(", liked=' ").append(liked).append('\'');
         sb.append(", viewsNum=' ").append(viewsNum).append('\'');
+        sb.append(", likeBtn=' ").append(likeBtn).append('\'');
         sb.append('}');
         return sb.toString();
 
@@ -155,7 +166,7 @@ public class News implements Parcelable {
         dest.writeInt(this.shareNum);
         dest.writeInt(this.liked);
         dest.writeInt(this.viewsNum);
-
+        dest.writeInt(this.likeBtn);
     }
 
     protected News(Parcel in) {
@@ -169,9 +180,8 @@ public class News implements Parcelable {
         this.shareNum = in.readInt();
         this.liked = in.readInt();
         this.viewsNum = in.readInt();
+        this.likeBtn = in.readInt();
     }
-
-
 
     public static final Creator<News> CREATOR = new Creator<News>(){
 
