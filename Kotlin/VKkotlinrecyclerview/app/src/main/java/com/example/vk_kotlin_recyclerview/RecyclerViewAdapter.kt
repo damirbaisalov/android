@@ -50,9 +50,14 @@ class RecyclerViewAdapter(
               likeNum.text = post.likeNum.toString()
               commentNum.text = post.commentNum.toString()
               shareNum.text = post.shareNum.toString()
-              Glide.with(likeBtn.context).load(post.likeBtn).into(likeBtn)
 
-                likeBtn.setOnClickListener(){
+            if (post.liked==1){
+                Glide.with(likeBtn.context).load(R.drawable.ic_like).into(likeBtn)
+            } else{
+                Glide.with(likeBtn.context).load(R.drawable.ic_favorite_black).into(likeBtn)
+            }
+
+            likeBtn.setOnClickListener(){
                     if (post.liked==1){
                         post.liked=0
                         post.likeNum = post.likeNum - 1
@@ -74,7 +79,6 @@ class RecyclerViewAdapter(
                     }
             }
 
-
             view.setOnClickListener {
                 itemClickListener?.itemClick(adapterPosition, post)
             }
@@ -82,10 +86,6 @@ class RecyclerViewAdapter(
     }
 
     interface RecyclerViewItemClick {
-
         fun itemClick(position: Int, item: News)
     }
-
-
-
 }

@@ -30,7 +30,7 @@ class NewsDetailActivity : AppCompatActivity() {
         val mEdit = findViewById<EditText>(R.id.editComment)
         mEdit.setOnClickListener({ v -> mEdit.isFocusableInTouchMode})
 
-        val detailedNews  = intent.getParcelableExtra<News>("news")
+        val detailedNews  = intent.getParcelableExtra<News>("news")!!
 
         imageName.text = detailedNews.imageName
         timeName.text  = detailedNews.timeName

@@ -11,7 +11,6 @@ class MainActivity : AppCompatActivity(),RecyclerViewAdapter.RecyclerViewItemCli
     lateinit var recyclerView : RecyclerView
     private var newsAdapter: RecyclerViewAdapter? = null
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -20,7 +19,6 @@ class MainActivity : AppCompatActivity(),RecyclerViewAdapter.RecyclerViewItemCli
         recyclerView.layoutManager = LinearLayoutManager(this)
         newsAdapter = RecyclerViewAdapter(GenerateNews(),itemClickListener = this)
         recyclerView.adapter = newsAdapter
-
     }
 
     override fun itemClick(position: Int, item: News)  {
