@@ -31,6 +31,7 @@ public class FavoritesFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_favorites, container, false);
     }
 
+    //init for recyclerView and adapter
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -52,6 +53,7 @@ public class FavoritesFragment extends Fragment {
 
     }
 
+    //Generate favorite list function
     private List<News> generateNews(){
         return favoriteNews;
     }

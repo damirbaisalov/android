@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
+
     //container for all news from database
     public List<News> items = new ArrayList<>();
 
@@ -39,9 +40,11 @@ public class HomeFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
+    //init the recyclerView and adapter
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         listener = new NewsAdapter.ItemClickListener() {
             @Override
             public void itemClick(int position, News item) {
@@ -55,14 +58,15 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         adapter = new NewsAdapter(generateNews(), listener);
         recyclerView.setAdapter(adapter);
-
     }
+
     //return data from newsDATABASE
     private List<News> generateNews() {
         items = DataNews.news;
         return items;
     }
 
+    //resotre the state of news in recyclerView when opened again
     @Override
     public void onResume(){
         super.onResume();
@@ -72,6 +76,7 @@ public class HomeFragment extends Fragment {
         }
     }
 
+    //save the state of news in recyclerView when changed to another fragment
     @Override
     public void onPause(){
         super.onPause();

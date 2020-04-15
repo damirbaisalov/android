@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataNews {
+    //DATABASE FOR NEWS
     public static List<News> news = new ArrayList<>();
     static {
         ArrayList<Integer> image = new ArrayList<>();

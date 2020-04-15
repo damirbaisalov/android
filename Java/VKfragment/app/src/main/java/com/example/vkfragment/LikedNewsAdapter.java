@@ -28,18 +28,16 @@ public class LikedNewsAdapter extends RecyclerView.Adapter<LikedNewsAdapter.Like
     @Nullable private ItemClickListener listener;
 
 
-    public LikedNewsAdapter(List<News> likedNewsList,
-                            @Nullable ItemClickListener listener
-                           ) {
+    public LikedNewsAdapter(List<News> likedNewsList, @Nullable ItemClickListener listener) {
         this.likedNewsList = likedNewsList;
         this.listener = listener;
     }
 
     @NonNull
     @Override
-
     public LikedNewsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_listitem , null, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_listitem ,
+                null, false);
         RecyclerView.LayoutParams params = new RecyclerView.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
@@ -85,7 +83,6 @@ public class LikedNewsAdapter extends RecyclerView.Adapter<LikedNewsAdapter.Like
                         @SuppressLint("ShowToast") Toast toast = Toast.makeText(v.getContext(),
                                 "Like removed",Toast.LENGTH_LONG);
                         toast.setGravity(Gravity.CENTER,0,0);
-
                     }
                 }
             }
